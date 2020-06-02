@@ -4,4 +4,9 @@
     <string name="tab_favorites_title">Favorites</string>
     <string name="activity_new_neighbour">New neighbour</string>
     <string name="about_me">A propos de moi</string>
+    <string name="desc_avatar">avatar</string>
+    <string name="desc_logo_localisation">logo localisation</string>
+    <string name="desc_logo_phone">logo phone</string>
+    <string name="desc_logo_site">logo site</string>
+    <string name="desc_return_button">return button</string>
 </resources>
