@@ -21,7 +21,7 @@
         android:id="@+id/activity_details_name1_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="25dp"
         android:textColor="@android:color/white"
         android:textSize="37sp"
@@ -32,7 +32,10 @@
         android:id="@+id/activity_details_card_view_neighbour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="5dp"
         app:cardElevation="0.7dp"
@@ -209,6 +212,6 @@
         app:layout_constraintEnd_toEndOf="@+id/activity_details_card_view_neighbour"
         app:layout_constraintBottom_toTopOf="@+id/activity_details_card_view_neighbour"
         app:layout_constraintTop_toBottomOf="@id/activity_details_profil_picture"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/ic_baseline_star_24"/>
 
 </android.support.constraint.ConstraintLayout>
