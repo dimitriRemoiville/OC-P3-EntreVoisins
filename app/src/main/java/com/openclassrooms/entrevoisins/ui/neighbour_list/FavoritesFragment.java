@@ -24,12 +24,10 @@ import java.util.List;
 public class FavoritesFragment extends Fragment {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mFavoritesNeighbours;
     private RecyclerView mRecyclerView;
 
     public static FavoritesFragment newInstance() {
-        FavoritesFragment fragment = new FavoritesFragment();
-        return fragment;
+        return new FavoritesFragment();
     }
 
     @Override
@@ -53,8 +51,8 @@ public class FavoritesFragment extends Fragment {
      * Init the List of favorites neighbours
      */
     private void initList() {
-        mFavoritesNeighbours = mApiService.getFavoritesNeighbours();
-        mRecyclerView.setAdapter(new MyFavoritesRecyclerViewAdapter(mFavoritesNeighbours));
+        List<Neighbour> favoritesNeighbours = mApiService.getFavoritesNeighbours();
+        mRecyclerView.setAdapter(new MyFavoritesRecyclerViewAdapter(favoritesNeighbours));
     }
 
     @Override

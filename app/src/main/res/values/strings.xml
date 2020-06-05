@@ -8,5 +8,13 @@
     <string name="desc_logo_localisation">logo localisation</string>
     <string name="desc_logo_phone">logo phone</string>
     <string name="desc_logo_site">logo site</string>
-    <string name="desc_return_button">return button</string>
+    <string name="neighbour_s_avatar">Neighbour\'s avatar</string>
+    <string name="yellow_star">Yellow star</string>
+    <string name="facebook">www.facebook.fr/</string>
+    <string name="desc_pink_bin">Pink bin</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_phone_number">Phone number</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_about_me">About me</string>
+    <string name="hint_save">Save</string>
 </resources>

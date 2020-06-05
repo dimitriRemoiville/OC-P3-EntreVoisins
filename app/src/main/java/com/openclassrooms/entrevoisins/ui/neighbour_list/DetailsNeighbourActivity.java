@@ -1,9 +1,8 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,14 +14,7 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 public class DetailsNeighbourActivity extends AppCompatActivity {
 
-    private ImageView mProfilPicture;
-    private TextView mName1Text;
-    private TextView mName2Text;
-    private TextView mLocationText;
-    private TextView mPhoneText;
-    private TextView mSiteText;
     private FloatingActionButton mFavoriteButton;
-    private TextView mAboutMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +25,25 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
         Neighbour neighbour = getIntent().getParcelableExtra("Neighbour");
 
         //
-        mProfilPicture = (ImageView) findViewById(R.id.activity_details_profil_picture);
-        mName1Text = (TextView) findViewById(R.id.activity_details_name1_text);
-        mName2Text = (TextView) findViewById(R.id.activity_details_name2_text);
-        mLocationText = (TextView) findViewById(R.id.activity_details_location_text);
-        mPhoneText = (TextView) findViewById(R.id.activity_details_phone_text);
-        mSiteText = (TextView) findViewById(R.id.activity_details_site_txt);
-        mFavoriteButton = (FloatingActionButton) findViewById(R.id.activity_details_favorite_btn);
-        mAboutMe = (TextView) findViewById(R.id.activity_details_about_me_text);
+        ImageView profilPicture = findViewById(R.id.activity_details_profil_picture);
+        TextView name1Text = findViewById(R.id.activity_details_name1_text);
+        TextView name2Text = findViewById(R.id.activity_details_name2_text);
+        TextView locationText = findViewById(R.id.activity_details_location_text);
+        TextView phoneText = findViewById(R.id.activity_details_phone_text);
+        TextView siteText = findViewById(R.id.activity_details_site_txt);
+        mFavoriteButton = findViewById(R.id.activity_details_favorite_btn);
+        TextView aboutMe = findViewById(R.id.activity_details_about_me_text);
 
         // Alimentation des différents champs avec les attributs du voisin
         Glide.with(this)
                 .load(neighbour.getAvatarUrl())
-                .into(mProfilPicture);
-        mName1Text.setText(neighbour.getName());
-        mName2Text.setText(neighbour.getName());
-        mLocationText.setText(neighbour.getAddress());
-        mPhoneText.setText(neighbour.getPhoneNumber());
-        mSiteText.setText("www.facebook.fr/" + neighbour.getName().toLowerCase());
-        mAboutMe.setText(neighbour.getAboutMe());
+                .into(profilPicture);
+        name1Text.setText(neighbour.getName());
+        name2Text.setText(neighbour.getName());
+        locationText.setText(neighbour.getAddress());
+        phoneText.setText(neighbour.getPhoneNumber());
+        siteText.setText(getString(R.string.facebook) + neighbour.getName().toLowerCase());
+        aboutMe.setText(neighbour.getAboutMe());
         NeighbourApiService apiService = DI.getNeighbourApiService();
         Boolean favorite = apiService.getFavoriteNeighbour(neighbour);
 
@@ -62,16 +54,13 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
             mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
         }
 
-        mFavoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (apiService.getFavoriteNeighbour(neighbour)){
-                    mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
-                    apiService.deleteFavoriteNeighbour(neighbour);
-                } else {
-                    mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
-                    apiService.addFavoriteNeighbour(neighbour);
-                }
+        mFavoriteButton.setOnClickListener(v -> {
+            if (apiService.getFavoriteNeighbour(neighbour)){
+                mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
+                apiService.deleteFavoriteNeighbour(neighbour);
+            } else {
+                mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
+                apiService.addFavoriteNeighbour(neighbour);
             }
         });
     }

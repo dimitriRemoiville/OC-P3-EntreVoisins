@@ -6,7 +6,7 @@ public class DeleteFavoriteEvent {
     /**
      * Neighbour to delete
      */
-    public Neighbour neighbour;
+    public final Neighbour neighbour;
 
     /**
      * Constructor.

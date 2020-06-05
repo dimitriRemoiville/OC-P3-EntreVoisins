@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.events.DeleteFavoriteEvent;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
@@ -35,7 +34,7 @@ public class MyFavoritesRecyclerViewAdapter extends RecyclerView.Adapter<MyFavor
     public MyFavoritesRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_favorites, parent, false);
-        return new MyFavoritesRecyclerViewAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -47,20 +46,12 @@ public class MyFavoritesRecyclerViewAdapter extends RecyclerView.Adapter<MyFavor
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mFavoritesAvatar);
 
-        holder.mDeleteFromFavButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteFavoriteEvent(neighbour));
-            }
-        });
+        holder.mDeleteFromFavButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteFavoriteEvent(neighbour)));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(),DetailsNeighbourActivity.class);
-                intent.putExtra("Neighbour", neighbour);
-                holder.itemView.getContext().startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(),DetailsNeighbourActivity.class);
+            intent.putExtra("Neighbour", neighbour);
+            holder.itemView.getContext().startActivity(intent);
         });
     }
 
@@ -69,7 +60,7 @@ public class MyFavoritesRecyclerViewAdapter extends RecyclerView.Adapter<MyFavor
         return mFavorites.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_avatar_fav)
         public ImageView mFavoritesAvatar;
         @BindView(R.id.item_list_name_fav)
