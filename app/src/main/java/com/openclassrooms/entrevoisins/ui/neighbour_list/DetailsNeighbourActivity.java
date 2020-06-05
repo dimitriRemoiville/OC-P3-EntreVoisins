@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 public class DetailsNeighbourActivity extends AppCompatActivity {
 
@@ -50,9 +52,11 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
         mPhoneText.setText(neighbour.getPhoneNumber());
         mSiteText.setText("www.facebook.fr/" + neighbour.getName().toLowerCase());
         mAboutMe.setText(neighbour.getAboutMe());
+        NeighbourApiService apiService = DI.getNeighbourApiService();
+        Boolean favorite = apiService.getFavoriteNeighbour(neighbour);
 
-        // Gestion du bouton favoris
-        if (neighbour.getFavorite()){
+            // Gestion du bouton favoris
+        if (favorite){
             mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
         } else {
             mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
@@ -61,7 +65,13 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
         mFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (apiService.getFavoriteNeighbour(neighbour)){
+                    mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
+                    apiService.deleteFavoriteNeighbour(neighbour);
+                } else {
+                    mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
+                    apiService.addFavoriteNeighbour(neighbour);
+                }
             }
         });
     }
