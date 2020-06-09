@@ -23,7 +23,6 @@ public class ListNeighbourActivity extends AppCompatActivity {
     ViewPager mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
-    private static final String TAG = "ListNeighbourActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,7 +4,7 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 
 public class DeleteFavoriteEvent {
     /**
-     * Neighbour to delete
+     * Neighbour to delete from the favorite list
      */
     public final Neighbour neighbour;
 

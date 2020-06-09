@@ -21,10 +21,10 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_neighbour);
 
-        // Récupération du voisin
+        // Neighbour to display
         Neighbour neighbour = getIntent().getParcelableExtra("Neighbour");
 
-        //
+        // Associate views with the corresponding id's in the layout
         ImageView profilPicture = findViewById(R.id.activity_details_profil_picture);
         TextView name1Text = findViewById(R.id.activity_details_name1_text);
         TextView name2Text = findViewById(R.id.activity_details_name2_text);
@@ -34,7 +34,7 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
         mFavoriteButton = findViewById(R.id.activity_details_favorite_btn);
         TextView aboutMe = findViewById(R.id.activity_details_about_me_text);
 
-        // Alimentation des différents champs avec les attributs du voisin
+        // Retrieve all the data nedded to display the neighbour details
         Glide.with(this)
                 .load(neighbour.getAvatarUrl())
                 .into(profilPicture);
@@ -44,16 +44,16 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
         phoneText.setText(neighbour.getPhoneNumber());
         siteText.setText(getString(R.string.facebook) + neighbour.getName().toLowerCase());
         aboutMe.setText(neighbour.getAboutMe());
+
+        // Is the neighbor already in the favorites list
         NeighbourApiService apiService = DI.getNeighbourApiService();
         Boolean favorite = apiService.getFavoriteNeighbour(neighbour);
-
-            // Gestion du bouton favoris
         if (favorite){
             mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
         } else {
             mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
         }
-
+        //Detection of click on favorite button
         mFavoriteButton.setOnClickListener(v -> {
             if (apiService.getFavoriteNeighbour(neighbour)){
                 mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
