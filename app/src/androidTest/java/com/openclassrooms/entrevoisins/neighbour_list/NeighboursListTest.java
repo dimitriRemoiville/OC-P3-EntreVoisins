@@ -46,8 +46,8 @@ public class NeighboursListTest {
 
     private ListNeighbourActivity mActivity;
     private List<Neighbour> mNeighbourList = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
-    private NeighbourApiService mApiService = DI.getNeighbourApiService();
-    private List<Neighbour> mFavoritesNeighbours = mApiService.getFavoritesNeighbours();
+    private NeighbourApiService mApiService;
+    private List<Neighbour> mFavoritesNeighbours;
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
@@ -57,6 +57,8 @@ public class NeighboursListTest {
     public void setUp() {
         mActivity = mActivityRule.getActivity();
         assertThat(mActivity, notNullValue());
+        mApiService = DI.getNeighbourApiService();
+        mFavoritesNeighbours = mApiService.getFavoritesNeighbours();
     }
 
     /**

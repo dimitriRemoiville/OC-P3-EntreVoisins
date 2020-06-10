@@ -46,11 +46,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
 
     @Override
     public Boolean getFavoriteNeighbour(Neighbour neighbour) {
-        if (favorites != null) {
-            return favorites.contains(neighbour);
-        } else {
-            return false;
-        }
+        return favorites.contains(neighbour);
     }
 
     @Override
